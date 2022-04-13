@@ -16,5 +16,5 @@ h1 {
 .gradient {
   color: transparent;
   -webkit-background-clip: text;
-  background-image: linear-gradient(to right, #ef4444, #3b82f6)
+  background-image: linear-gradient(to right, var(--gradient-color-1), var(--gradient-color-2))
 }
