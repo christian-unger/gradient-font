@@ -3,11 +3,11 @@ import { getValidColors, useFollowMouse, getCssRules, hash } from "./lib"
 import "./styles/animations.css"
 
 export const GradientText = ({
+  colors,
+  data,
   children,
   className,
   style = {},
-  colors,
-  data,
   element = "span",
   animation,
   direction = "to right",

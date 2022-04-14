@@ -27,18 +27,19 @@ const Home = () => {
         />
       </h1>
       <p>
-        A lightweight, declarative react library for creating{" "}
+        A lightweight React library ⚛️ for creating <br />
         <GradientText
           colors={["white", "#9684E3", "white"]}
           animation="follow-mouse"
           direction="45deg"
-          data="animatable"
-        />{" "}
+        >
+          effortless
+        </GradientText>{" "}
         <GradientText colors={["gold", "orchid"]}>eye-catching</GradientText>{" "}
         <GradientText colors={["#3FBF8F", "gold"]}>text gradients</GradientText>
       </p>
       <button onClick={scrollToDemo}>
-        <GradientText colors={["#0080ef", "#04d3db"]}>Try it out</GradientText>
+        <GradientText colors={["#0080ef", "#04d3db"]}>Try it out!</GradientText>
       </button>
     </section>
   )
@@ -49,7 +50,7 @@ const Demo = () => {
   // replace with reducer
   const [colors, setColors] = React.useState(ukraineFlagColors)
   const [text, setText] = React.useState("Україна")
-  const [animated, setAnimated] = React.useState(true)
+  const [animated, setAnimated] = React.useState(false)
 
   const handleChangeFirstColor: React.ChangeEventHandler<HTMLInputElement> =
     event => setColors(([, secondColor]) => [event.target.value, secondColor])
@@ -66,7 +67,7 @@ const Demo = () => {
     <section id="demo">
       <GradientText
         element="h1"
-        style={{ fontSize: "9rem", margin: "2rem" }}
+        style={{ fontSize: "min(9rem, 20vw)", margin: "2rem" }}
         colors={colors}
         animation={animated ? "transition" : undefined}
         direction="90deg"

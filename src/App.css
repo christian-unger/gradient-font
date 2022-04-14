@@ -15,12 +15,13 @@ h1 {
   font-weight: 900;
   display: flex;
   flex-flow: column nowrap;
+  padding: 0 2rem;
 }
 
 p {
   font-size: 1.4rem;
-  margin: 2rem;
-  max-width: 30rem;
+  padding: 2rem;
+  max-width: 32rem;
 }
 
 button {
