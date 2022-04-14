@@ -1,6 +1,8 @@
 import * as React from "react"
 import GradientText from "./GradientText"
 import "./App.css"
+import { GradientBorder } from "./GradientText/GradientBorder"
+import { GradientButton } from "./GradientText/GradientButton"
 
 export const App = () => (
   <main>
@@ -38,9 +40,11 @@ const Home = () => {
         <GradientText colors={["gold", "orchid"]}>eye-catching</GradientText>{" "}
         <GradientText colors={["#3FBF8F", "gold"]}>text gradients</GradientText>
       </p>
-      <button onClick={scrollToDemo}>
-        <GradientText colors={["#0080ef", "#04d3db"]}>Try it out!</GradientText>
-      </button>
+      <div style={{ paddingTop: "2rem" }}>
+        <GradientButton colors={["#0080ef", "#04d3db"]} onClick={scrollToDemo}>
+          Try it out
+        </GradientButton>
+      </div>
     </section>
   )
 }
@@ -50,7 +54,7 @@ const Demo = () => {
   // replace with reducer
   const [colors, setColors] = React.useState(ukraineFlagColors)
   const [text, setText] = React.useState("Україна")
-  const [animated, setAnimated] = React.useState(false)
+  const [animated, setAnimated] = React.useState(true)
 
   const handleChangeFirstColor: React.ChangeEventHandler<HTMLInputElement> =
     event => setColors(([, secondColor]) => [event.target.value, secondColor])

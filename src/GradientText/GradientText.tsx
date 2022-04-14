@@ -6,7 +6,7 @@ export const GradientText = ({
   colors,
   data,
   children,
-  className,
+  className = "",
   style = {},
   element = "span",
   animation,
