@@ -6,7 +6,7 @@ export const useFollowMouse = (enabled: boolean) => {
     backgroundPositionY: 0,
   })
 
-  React.useEffect(() => {
+  React.useLayoutEffect(() => {
     const handlePositionChange = (event: MouseEvent) =>
       setPosition({
         backgroundPositionX: event.clientX / 2,

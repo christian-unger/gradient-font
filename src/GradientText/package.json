@@ -1,5 +1,5 @@
 {
-  "main": "GradientText.tsx",
+  "main": "index.ts",
   "version": "0.0.0",
   "license": "MIT"
 }

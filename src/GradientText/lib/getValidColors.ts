@@ -11,7 +11,7 @@ export const getValidColors = (colors: string | string[]) => {
   if (validColors.length === 1) {
     validColors.push("red")
   }
-  return validColors
+  return validColors.toString()
 }
 
 const isValidColor = (color: string) => {
