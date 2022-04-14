@@ -13,6 +13,8 @@ main {
 h1 {
   font-size: 3rem;
   font-weight: 900;
+  display: flex;
+  flex-flow: column nowrap;
 }
 
 p {

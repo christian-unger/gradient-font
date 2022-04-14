@@ -1,13 +1,12 @@
 import * as React from "react"
-import { GradientText } from "./GradientText"
+import GradientText from "./GradientText"
 import "./App.css"
 
 export const App = () => (
   <main>
     <h1>
       <span>Create your own</span>
-      <br />
-      <GradientText colors={["#ef4444", "#3b82f6"]}>
+      <GradientText colors={["#ef4444", "#3b82f6"]} direction="-45deg" animated>
         gradient text like a pro.
       </GradientText>
     </h1>
