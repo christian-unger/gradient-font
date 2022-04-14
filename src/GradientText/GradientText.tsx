@@ -5,29 +5,6 @@ import { hash } from "./hash"
 import { useFollowMouse } from "./useFollowMouse"
 import "./animations.css"
 
-interface BaseGradientTextProps {
-  colors: string | string[]
-  as?: "span" | "div" | "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
-  animation?: "transition" | "follow-mouse"
-  direction?: string
-  style?: React.CSSProperties
-  className?: string
-}
-
-interface GradientTextPropsWithChildren extends BaseGradientTextProps {
-  children: string
-  data?: never
-}
-
-interface GradientTextPropsWithData extends BaseGradientTextProps {
-  children?: never
-  data: string
-}
-
-export type GradientTextProps =
-  | GradientTextPropsWithChildren
-  | GradientTextPropsWithData
-
 export const GradientText = (props: GradientTextProps) => {
   const {
     children,
@@ -39,7 +16,7 @@ export const GradientText = (props: GradientTextProps) => {
     animation,
     direction = "to right",
   } = props
-  const uid = hash(JSON.stringify(props))
+  const uid = hash(JSON.stringify({ colors, animation, direction }))
   const validColors = getValidColors(colors)
   const validColorsString = validColors.toString()
   const position = useFollowMouse(animation === "follow-mouse")
@@ -56,13 +33,11 @@ export const GradientText = (props: GradientTextProps) => {
           ${validColorsString}
         );
         background-image: linear-gradient(${direction}, ${validColorsString});
-
         ${animation === "transition"
           ? `
-        
             background-size: 400%;
             -webkit-animation: gradient 5s ease infinite;
-            animation: gradient 5s ease infinite;
+                    animation: gradient 5s ease infinite;
           `
           : ""}
         ${animation === "follow-mouse" ? "background-size: 400% auto;" : ""}
@@ -78,13 +53,15 @@ export const GradientText = (props: GradientTextProps) => {
         document.head.removeChild(style)
       }
     }
-  }, [validColorsString])
+  }, [uid])
 
-  return React.createElement(as, {
+  const GradientElement = React.createElement(as, {
     className: `gradient-text-${uid} ${className}`,
     children: data ?? children,
     style: animation === "follow-mouse" ? { ...position, ...style } : style,
   })
+
+  return GradientElement
 }
 
 export default GradientText
