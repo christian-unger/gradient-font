@@ -1,4 +1,16 @@
-main {
+/* main {
+  block-size: 100vh;
+  inline-size: 100vw;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  background: #111;
+  color: white;
+  text-align: center;
+} */
+
+section {
   block-size: 100vh;
   inline-size: 100vw;
   display: flex;
@@ -21,4 +33,10 @@ p {
   font-size: 1.4rem;
   margin: 2rem;
   max-width: 30rem;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  font-size: 1.4rem;
 }

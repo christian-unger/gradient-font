@@ -2,32 +2,49 @@ import * as React from "react"
 import { getValidColors } from "./getValidColors"
 import { css } from "./css"
 import { hash } from "./hash"
-import "./gradient.css"
+import { useFollowMouse } from "./useFollowMouse"
+import "./animations.css"
 
-export type GradientTextProps = {
-  children: string
-  data?: string
+interface BaseGradientTextProps {
   colors: string | string[]
   as?: "span" | "div" | "p" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
-  animated?: boolean
+  animation?: "transition" | "follow-mouse"
   direction?: string
+  style?: React.CSSProperties
+  className?: string
 }
+
+interface GradientTextPropsWithChildren extends BaseGradientTextProps {
+  children: string
+  data?: never
+}
+
+interface GradientTextPropsWithData extends BaseGradientTextProps {
+  children?: never
+  data: string
+}
+
+export type GradientTextProps =
+  | GradientTextPropsWithChildren
+  | GradientTextPropsWithData
 
 export const GradientText = (props: GradientTextProps) => {
   const {
     children,
+    className,
+    style = {},
     colors,
     data,
     as = "span",
-    animated = false,
+    animation,
     direction = "to right",
   } = props
   const uid = hash(JSON.stringify(props))
   const validColors = getValidColors(colors)
   const validColorsString = validColors.toString()
+  const position = useFollowMouse(animation === "follow-mouse")
 
   React.useLayoutEffect(() => {
-    // * Generate CSS and add it to the DOM
     const rules = css`
       .gradient-text-${uid} {
         color: transparent;
@@ -39,13 +56,16 @@ export const GradientText = (props: GradientTextProps) => {
           ${validColorsString}
         );
         background-image: linear-gradient(${direction}, ${validColorsString});
-        ${animated
+
+        ${animation === "transition"
           ? `
+        
             background-size: 400%;
             -webkit-animation: gradient 5s ease infinite;
             animation: gradient 5s ease infinite;
           `
           : ""}
+        ${animation === "follow-mouse" ? "background-size: 400% auto;" : ""}
       }
     `
     const style = document.createElement("style")
@@ -53,7 +73,6 @@ export const GradientText = (props: GradientTextProps) => {
     style.setAttribute("id", uid)
     document.head.appendChild(style)
 
-    // * remove css from dom on unmount
     return () => {
       if (style && document.head.contains(style)) {
         document.head.removeChild(style)
@@ -61,10 +80,10 @@ export const GradientText = (props: GradientTextProps) => {
     }
   }, [validColorsString])
 
-  // * use createElement API for element as
   return React.createElement(as, {
-    className: `gradient-text-${uid}`,
+    className: `gradient-text-${uid} ${className}`,
     children: data ?? children,
+    style: animation === "follow-mouse" ? { ...position, ...style } : style,
   })
 }
 
